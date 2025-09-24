@@ -1,7 +1,4 @@
-import { Component } from '@angular/core';
-import { USUARIOS_FALSOS } from '../usuarios-falsos';
-
-const indiceAleatorio = Math.floor(Math.random() * USUARIOS_FALSOS.length);
+import { Component, computed, EventEmitter, Input, input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-usuario',
@@ -11,30 +8,18 @@ const indiceAleatorio = Math.floor(Math.random() * USUARIOS_FALSOS.length);
 })
 export class UsuarioComponent {
 
-  usuarioSeleccionado = USUARIOS_FALSOS[indiceAleatorio];
+  // El {} es un objeto de configuración para el decorador 'Input'
+  @Input({required: true}) id!: string;
+  @Input({required: true}) avatar!: string;
+  @Input({required: true}) nombre!: string;
 
-  /**
-   * Obtiene la ruta de la imagen del avatar del usuario seleccionado.
-   * @returns {string} Ruta de la imagen del avatar.
-   */
-  get rutaImagen() {
-    return 'assets/usuarios/' + this.usuarioSeleccionado.avatar;
-  }
-
-  /**
-   * Obtiene el nombre del usuario seleccionado.
-   * @returns {string} Nombre del usuario.
-   */
-  get nombreUsuario() {
-    return this.usuarioSeleccionado.nombre;
-  }
+  @Output() selection = new EventEmitter();
   
-  /**
-   * Maneja la selección de un nuevo usuario aleatorio.
-   * Actualiza la propiedad `usuarioSeleccionado` con un nuevo usuario.
-   */
+  get rutaImagen(){
+    return 'assets/usuarios/' + this.avatar;
+  }
+
   handleUserSelect() {
-    const indiceAleatorio = Math.floor(Math.random() * USUARIOS_FALSOS.length);
-    this.usuarioSeleccionado = USUARIOS_FALSOS[indiceAleatorio];
+    this.selection.emit(this.id);
   }
 }
