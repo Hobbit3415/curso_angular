@@ -13,7 +13,7 @@ import { TareasComponent } from "./tareas/tareas.component";
 })
 export class AppComponent {
   usuarios = USUARIOS_FALSOS;
-  idUsuarioSeleccionado = "u1";
+  idUsuarioSeleccionado?: string;
   nombreUsuario: { id: string; nombre: string; avatar: string; } | undefined;
 
   get usuarioSeleccionado(){

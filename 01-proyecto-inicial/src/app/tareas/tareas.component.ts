@@ -10,5 +10,5 @@ import { USUARIOS_FALSOS } from '../usuarios-falsos';
 })
 export class TareasComponent {
 
-  @Input({required: true}) nombreUsuario!: string;
+  @Input() nombreUsuario?: string;
 }
