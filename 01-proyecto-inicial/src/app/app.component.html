@@ -17,4 +17,5 @@
       <app-usuario [id]="usuarios[4].id" [avatar]="usuarios[4].avatar" [nombre]="usuarios[4].nombre" (selection)="handleSelectUser($event)" />
     </li>
   </ul>
+  <app-tareas [nombreUsuario]="usuarioSeleccionado.nombre" />
 </main>
