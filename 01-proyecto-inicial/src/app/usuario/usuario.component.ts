@@ -1,10 +1,5 @@
-import { Component, computed, EventEmitter, Input, input, Output } from '@angular/core';
-
-type Usuario = {
-  id: string;
-  nombre: string;
-  avatar: string;
-}
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { type Usuario } from './usuario.model';
 
 @Component({
   selector: 'app-usuario',
@@ -16,6 +11,7 @@ export class UsuarioComponent {
 
   // El {} es un objeto de configuración para el decorador 'Input'
   @Input({required:true}) usuario!: Usuario;
+  @Input({required:true}) seleccionado!: boolean;
 
   @Output() selection = new EventEmitter();
   

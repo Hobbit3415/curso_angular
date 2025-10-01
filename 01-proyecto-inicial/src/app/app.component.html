@@ -5,13 +5,17 @@
       <li>
         <app-usuario 
           [usuario]="usuario"
+          [seleccionado]="usuario.id === idUsuarioSeleccionado"
           (selection)="handleSelectUser($event)" 
         />
       </li>
     }
   </ul>
   @if (usuarioSeleccionado) {
-    <app-tareas [nombreUsuario]="usuarioSeleccionado.nombre" />
+    <app-tareas 
+      [idUsuario]="usuarioSeleccionado.id"
+      [nombreUsuario]="usuarioSeleccionado.nombre"
+    />
   }@else {
     <p id="textoCondicional">Seleccione un usuario de la lista</p>
   }

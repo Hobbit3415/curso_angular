@@ -16,11 +16,11 @@ export class AppComponent {
   idUsuarioSeleccionado?: string;
   nombreUsuario: { id: string; nombre: string; avatar: string; } | undefined;
 
-  get usuarioSeleccionado(){
-    return this.usuarios.find( (x) => x.id === this.idUsuarioSeleccionado)!;
+  get usuarioSeleccionado() {
+    return this.usuarios.find((x) => x.id === this.idUsuarioSeleccionado)!;
   }
 
-  handleSelectUser(id: string){
+  handleSelectUser(id: string) {
     this.idUsuarioSeleccionado = id;
   }
 }
