@@ -1,16 +1,20 @@
 import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { TareaComponent } from "./tarea/tarea.component";
+import { NuevaTareaComponent } from "./nueva-tarea/nueva-tarea.component";
+import { NuevaTareaInfo } from './tarea/tarea.model';
 
 @Component({
   selector: 'app-tareas',
   standalone: true,
-  imports: [TareaComponent],
+  imports: [TareaComponent, NuevaTareaComponent],
   templateUrl: './tareas.component.html',
   styleUrl: './tareas.component.css'
 })
 export class TareasComponent {
   @Input({required: true}) idUsuario!: string;
   @Input({required: true}) nombreUsuario?: string;
+  estaAgregandoNuevaTarea = false;
+
   tareas = [
     {
       id: 't1',
@@ -38,4 +42,28 @@ export class TareasComponent {
   get tareasUsuarioSeleccionado(){
     return this.tareas.filter((x) => x.idUsuario===this.idUsuario)
   }
+
+  handleTareaCompletada(id: string){
+    this.tareas = this.tareas.filter((x) => x.id !== id)
+  }
+
+  handleCrearTarea(){
+    this.estaAgregandoNuevaTarea = true;
+  }
+  
+  handleCloseDialog(){
+    this.estaAgregandoNuevaTarea = false;
+  }
+
+  handleSubmitTarea(infoDeTarea: NuevaTareaInfo){
+    this.tareas.push({
+      id: new Date().getTime().toString(),
+      idUsuario: this.idUsuario,
+      titulo: infoDeTarea.titulo,
+      resumen: infoDeTarea.resumen,
+      expira: infoDeTarea.fecha
+    })
+    this.estaAgregandoNuevaTarea = false;
+  }
+
 }

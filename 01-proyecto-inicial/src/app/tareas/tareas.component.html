@@ -1,10 +1,14 @@
+@if (estaAgregandoNuevaTarea) {
+  <app-nueva-tarea (closeDialog)="handleCloseDialog()" (crearTarea)="handleSubmitTarea($event)" />
+}
+
 <section id="tareas">
     <header>
         <h2>
             Tareas de {{nombreUsuario}}
         </h2>
         <menu>
-            <button>
+            <button (click)="handleCrearTarea()" >
                 Agregar Nueva Tarea
             </button>
         </menu>
@@ -12,7 +16,7 @@
     <ul>
         @for (tarea of tareasUsuarioSeleccionado; track tarea.id) {
             <li>
-                <app-tarea [tarea]="tarea" />
+                <app-tarea [tarea]="tarea" (terminada)="handleTareaCompletada($event)" />
             </li>
         }
     </ul>
